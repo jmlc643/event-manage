@@ -1,12 +1,19 @@
+package com.td.tecnico.models;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table
 @Entity(name = "events")
-public class Event() {
+public class Event {
     @Id
-    @GeneratedValue(strategy = GenerateValue.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_event")
     private Integer idEvent;
 
