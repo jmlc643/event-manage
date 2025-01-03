@@ -9,6 +9,7 @@ import com.td.tecnico.models.Event;
 import com.td.tecnico.services.EventService;
 
 import java.util.List;
+import java.util.Date;
 
 @RestController
 @RequestMapping("event")
@@ -29,5 +30,15 @@ public class EventController {
     @GetMapping("/{id}")
     public ResponseEntity<Event> getEvent(@PathVariable Integer id) {
         return ResponseEntity.ok(eventService.getEvent(id));
+    }
+
+    @GetMapping("/search-title/")
+    public ResponseEntity<List<Event>> searchEventByTitle(@RequestParam String title) {
+        return ResponseEntity.ok(eventService.getEventByTitleOrDate(title, null, PageRequest.of(0, 20)));
+    }
+
+    @GetMapping("/search-date/")
+    public ResponseEntity<List<Event>> searchEventByDate(@RequestParam Date date) {
+        return ResponseEntity.ok(eventService.getEventByTitleOrDate("", date, PageRequest.of(0, 20)));
     }
 }

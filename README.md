@@ -54,6 +54,8 @@ He usado GitHub Copilot para ahorrar tiempo en algunas partes del desarrollo.
 
 ## Endpoints Disponibles
 
-- **GET /event/list/**: Lista todos los eventos.
+- **GET /event/list/?page=0**: Lista todos los eventos.
 - **GET /event/{id}**: Obtiene un evento por su ID.
 - **POST /event/create/**: Crea un nuevo evento.
+- **GET /event/search-title/?{titulo}**: Lista todos los eventos.
+- **GET /event/search-date/?{fecha}**: Obtiene un evento por su ID.
