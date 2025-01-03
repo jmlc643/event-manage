@@ -2,18 +2,19 @@
 
 Hola soy José María Luyo Campos, creador de esta API para el registro de eventos en el cual se puede registrar eventos con título, fecha y descripción, almacenar los datos en una Base de Datos y ver estos mismos.
 
-He usado GitHub Copilot para ahorrar tiempo en eventos simples.
+He usado GitHub Copilot para ahorrar tiempo en algunas partes del desarrollo.
 
 ## Tecnologías Utilizadas
 
 - **Spring Boot**: Para el desarrollo del backend.
+- **Gradle con Kotlin**: Para la gestión de dependencias y construcción del proyecto.
+- **H2 Database**: Base de datos en memoria para pruebas.
 - **GitHub Desktop**: Para el control de versiones en la plataforma GitHub.
 
 ## Requisitos Previos
 
-- Java Development Kit (JDK) 11 o superior.
-- Maven.
-- MySQL.
+- Java Development Kit (JDK) 17.
+- Gradle.
 - Git y GitHub Desktop.
 
 ## Configuración del Proyecto
@@ -21,39 +22,33 @@ He usado GitHub Copilot para ahorrar tiempo en eventos simples.
 1. Clona el repositorio:
 
     ```sh
-    git clone https://github.com/tu-usuario/event-manage.git
+    git clone https://github.com/jmlc643/event-manage.git
     cd event-manage
     ```
 
-2. Configura la base de datos MySQL:
-
-    - Crea una base de datos llamada `event_manage`.
-    - Ejecuta el script SQL `schema.sql` para crear la tabla `events` y agregar datos de prueba.
-
-    ```sh
-    mysql -u your_username -p < src/main/resources/schema.sql
-    ```
-
-3. Configura las propiedades de la aplicación:
+2. Configura las propiedades de la aplicación:
 
     - Abre el archivo [application.properties](http://_vscodecontentref_/1) y asegúrate de que las propiedades de conexión a la base de datos sean correctas.
 
     ```properties
-    spring.datasource.url=jdbc:mysql://localhost:3306/event_manage
-    spring.datasource.username=your_username
-    spring.datasource.password=your_password
+    spring.datasource.url=jdbc:h2:mem:testdb
+    spring.datasource.driverClassName=org.h2.Driver
+    spring.datasource.username=sa
+    spring.datasource.password=password
+    spring.h2.console.enabled=true
+    spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
     server.address=192.168.1.160
     server.port=8080
     ```
 
-4. Compila y ejecuta la aplicación:
+3. Compila y ejecuta la aplicación:
 
     ```sh
-    mvn clean install
-    mvn spring-boot:run
+    ./gradlew clean build
+    ./gradlew bootRun
     ```
 
-5. Accede a la API:
+4. Accede a la API:
 
     - La API estará disponible en `http://192.168.1.160:8080`.
 
@@ -62,11 +57,3 @@ He usado GitHub Copilot para ahorrar tiempo en eventos simples.
 - **GET /event/list/**: Lista todos los eventos.
 - **GET /event/{id}**: Obtiene un evento por su ID.
 - **POST /event/create/**: Crea un nuevo evento.
-
-## Contribuciones
-
-Si deseas contribuir a este proyecto, por favor, haz un fork del repositorio y envía un pull request con tus cambios.
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT.
